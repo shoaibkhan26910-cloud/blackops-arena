@@ -16,15 +16,17 @@
 
 <h2>Create Account</h2>
 
-<input type="text" placeholder="Full Name">
+<input type="text" id="fullname" placeholder="Full Name">
 
-<input type="email" placeholder="Email">
+<input type="email" id="email" placeholder="Email">
 
-<input type="text" placeholder="Mobile Number">
+<input type="text" id="mobile" placeholder="Mobile Number">
 
-<input type="password" placeholder="Create Password">
+<input type="password" id="password" placeholder="Create Password">
 
-<button>Create Account</button>
+<button onclick="signupUser()">Create Account</button>
+
+<p id="message" style="color:red;"></p>
 
 <p>Already have an account?</p>
 
@@ -32,7 +34,64 @@
 
 </div>
 
-<script src="script.js"></script>
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+  import {
+    getAuth,
+    createUserWithEmailAndPassword,
+    updateProfile
+  } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+
+  // 🔑 Yahan wahi Firebase config daalo jo login.html mein daala tha
+  const firebaseConfig = {
+    apiKey: "YOUR_API_KEY",
+    authDomain: "YOUR_PROJECT.firebaseapp.com",
+    projectId: "YOUR_PROJECT_ID",
+    storageBucket: "YOUR_PROJECT.appspot.com",
+    messagingSenderId: "YOUR_SENDER_ID",
+    appId: "YOUR_APP_ID"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+
+  window.signupUser = function () {
+    const fullname = document.getElementById("fullname").value.trim();
+    const email = document.getElementById("email").value.trim();
+    const mobile = document.getElementById("mobile").value.trim();
+    const password = document.getElementById("password").value;
+    const messageBox = document.getElementById("message");
+    messageBox.textContent = "";
+
+    if (!fullname || !email || !mobile || !password) {
+      messageBox.textContent = "Sabhi fields bharna zaroori hai.";
+      return;
+    }
+    if (password.length < 6) {
+      messageBox.textContent = "Password kam se kam 6 characters ka hona chahiye.";
+      return;
+    }
+
+    createUserWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        return updateProfile(userCredential.user, { displayName: fullname });
+      })
+      .then(() => {
+        messageBox.style.color = "lightgreen";
+        messageBox.textContent = "Account ban gaya! Redirecting to login...";
+        setTimeout(() => {
+          window.location.href = "login.html";
+        }, 1200);
+      })
+      .catch((error) => {
+        let msg = "Kuch galat ho gaya. Dobara try karo.";
+        if (error.code === "auth/email-already-in-use") msg = "Ye email pehle se registered hai.";
+        if (error.code === "auth/invalid-email") msg = "Email valid nahi hai.";
+        if (error.code === "auth/weak-password") msg = "Password bahut weak hai.";
+        messageBox.textContent = msg;
+      });
+  };
+</script>
 
 </body>
 </html>
