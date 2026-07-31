@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Login - BlackOps Arena</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Arial, sans-serif; }
+  body {
+    background: #000;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+  }
+  .login-box {
+    background: #111;
+    border: 1px solid #00ff7f;
+    border-radius: 12px;
+    padding: 30px;
+    width: 100%;
+    max-width: 380px;
+    box-shadow: 0 0 25px rgba(0, 255, 127, 0.25);
+  }
+  h2 {
+    text-align: center;
+    color: #00ff7f;
+    margin-bottom: 20px;
+  }
+  input {
+    width: 100%;
+    padding: 12px;
+    margin: 8px 0;
+    border-radius: 6px;
+    border: 1px solid #333;
+    background: #1a1a1a;
+    color: #fff;
+    font-size: 15px;
+  }
+  button {
+    width: 100%;
+    padding: 12px;
+    margin-top: 12px;
+    border: none;
+    border-radius: 6px;
+    background: #00ff7f;
+    color: #000;
+    font-weight: bold;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  button:hover { background: #00e673; }
+  .msg {
+    text-align: center;
+    margin-top: 12px;
+    font-size: 14px;
+    min-height: 18px;
+  }
+  .error { color: #ff5c5c; }
+  .success { color: #00ff7f; }
+  a { color: #00ff7f; text-decoration: none; }
+  .links {
+    text-align: center;
+    margin-top: 15px;
+    font-size: 14px;
+  }
+</style>
+</head>
+<body>
+
+<div class="login-box">
+  <h2>🎮 Login - BlackOps Arena</h2>
+  <input type="email" id="email" placeholder="Email">
+  <input type="password" id="password" placeholder="Password">
+  <button onclick="loginUser()">Login</button>
+  <div class="msg" id="message"></div>
+  <div class="links">
+    Naya account? <a href="signup.html">Sign up here</a>
+  </div>
+</div>
+
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+  import {
+    getAuth,
+    signInWithEmailAndPassword
+  } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+
+  // 🔑 Apna Firebase config yahan daalo
+  const firebaseConfig = {
+    apiKey: "YOUR_API_KEY",
+    authDomain: "YOUR_PROJECT.firebaseapp.com",
+    projectId: "YOUR_PROJECT_ID",
+    storageBucket: "YOUR_PROJECT.appspot.com",
+    messagingSenderId: "YOUR_SENDER_ID",
+    appId: "YOUR_APP_ID"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+
+  window.loginUser = function () {
+    const email = document.getElementById("email").value.trim();
+    const password = document.getElementById("password").value;
+    const messageBox = document.getElementById("message");
+    messageBox.textContent = "";
+    messageBox.className = "msg";
+
+    if (!email || !password) {
+      messageBox.textContent = "Email aur password bharna zaroori hai.";
+      messageBox.classList.add("error");
+      return;
+    }
+
+    signInWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        messageBox.textContent = "Login successful! Redirecting...";
+        messageBox.classList.add("success");
+        setTimeout(() => {
+          window.location.href = "dashboard.html";
+        }, 1000);
+      })
+      .catch((error) => {
+        let msg = "Login fail ho gaya. Dobara try karo.";
+        if (error.code === "auth/user-not-found") msg = "Ye email registered nahi hai.";
+        if (error.code === "auth/wrong-password") msg = "Password galat hai.";
+        if (error.code === "auth/invalid-email") msg = "Email valid nahi hai.";
+        if (error.code === "auth/invalid-credential") msg = "Email ya password galat hai.";
+        messageBox.textContent = msg;
+        messageBox.classList.add("error");
+      });
+  };
+</script>
+
+</body>
+</html>
