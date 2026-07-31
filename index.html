@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,172 +6,73 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>BlackOps Arena</title>
 
-<style>
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:Arial,sans-serif;
-}
+<link rel="stylesheet" href="style.css">
 
-body{
-background:#0d0d0d;
-color:white;
-}
-
-header{
-background:#111;
-padding:20px;
-text-align:center;
-border-bottom:2px solid #00ff88;
-}
-
-header h1{
-color:#00ff88;
-}
-
-nav{
-margin-top:10px;
-}
-
-nav a{
-color:white;
-text-decoration:none;
-margin:0 10px;
-}
-
-.hero{
-padding:80px 20px;
-text-align:center;
-background:linear-gradient(135deg,#000,#111,#222);
-}
-
-.hero h2{
-font-size:40px;
-color:#00ff88;
-}
-
-.hero p{
-margin-top:15px;
-font-size:18px;
-}
-
-.btn{
-display:inline-block;
-margin-top:20px;
-padding:12px 25px;
-background:#00ff88;
-color:black;
-font-weight:bold;
-text-decoration:none;
-border-radius:8px;
-}
-
-.games{
-padding:50px 20px;
-text-align:center;
-}
-
-.games h2{
-margin-bottom:30px;
-}
-
-.cards{
-display:flex;
-flex-wrap:wrap;
-justify-content:center;
-gap:20px;
-}
-
-.card{
-background:#1a1a1a;
-padding:20px;
-width:300px;
-border-radius:12px;
-border:1px solid #00ff88;
-}
-
-.card h3{
-color:#00ff88;
-margin-bottom:10px;
-}
-
-.tournaments{
-padding:50px 20px;
-background:#111;
-text-align:center;
-}
-
-.tournament-box{
-background:#1a1a1a;
-padding:20px;
-max-width:500px;
-margin:auto;
-border-radius:10px;
-border:1px solid #00ff88;
-}
-
-footer{
-text-align:center;
-padding:20px;
-background:#000;
-margin-top:40px;
-}
-</style>
 </head>
-
 <body>
 
 <header>
 <h1>🎮 BlackOps Arena</h1>
 
 <nav>
-<a href="#">Home</a>
-<a href="#">BGMI</a>
-<a href="#">Free Fire</a>
-<a href="#">Tournaments</a>
-<a href="#">Contact</a>
+<a href="index.html">Home</a>
+<a href="login.html">Login</a>
+<a href="signup.html">Signup</a>
+<a href="tournaments.html">Tournaments</a>
+<a href="profile.html">Profile</a>
 </nav>
+
 </header>
 
 <section class="hero">
-<h2>Welcome To BlackOps Arena</h2>
-<p>India's Gaming Community For BGMI & Free Fire Players</p>
-<a href="#" class="btn">Join Tournament</a>
+
+<h2>India's No.1 Esports Tournament Platform</h2>
+
+<p>Play BGMI & Free Fire tournaments. Win real cash prizes.</p>
+
+<a href="login.html" class="btn">Login Now</a>
+
+<a href="signup.html" class="btn">Create Account</a>
+
 </section>
 
 <section class="games">
-<h2>Popular Games</h2>
 
-<div class="cards">
+<h2>Popular Games</h2>
 
 <div class="card">
 <h3>BGMI</h3>
-<p>Join BGMI tournaments and compete with top players.</p>
+<p>Daily Custom Rooms & Tournaments</p>
 </div>
 
 <div class="card">
-<h3>Free Fire</h3>
-<p>Play Free Fire custom rooms and win rewards.</p>
+<h3>Free Fire MAX</h3>
+<p>Play Daily & Win Rewards</p>
 </div>
 
-</div>
 </section>
 
-<section class="tournaments">
-<h2>Upcoming Tournament</h2>
+<section class="games">
 
-<div class="tournament-box">
-<h3>BlackOps Championship</h3>
-<p>Date: Coming Soon</p>
-<p>Prize Pool: ₹10,000</p>
+<h2>Quick Links</h2>
+
+<div class="card">
+<a href="tournaments.html">🏆 Join Tournament</a>
+</div>
+
+<div class="card">
+<a href="profile.html">👤 My Profile</a>
 </div>
 
 </section>
 
 <footer>
-<p>© 2026 BlackOps Arena. All Rights Reserved.</p>
+
+<p>© 2026 BlackOps Arena | All Rights Reserved</p>
+
 </footer>
+
+<script src="script.js"></script>
 
 </body>
 </html>
