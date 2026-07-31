@@ -1,12 +1,78 @@
-script.js
-// BlackOps Arena Script
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,sans-serif;
+}
 
-document.addEventListener("DOMContentLoaded", function () {
-    const loginBtn = document.querySelector("button");
+body{
+    background:#0b0b0b;
+    color:white;
+}
 
-    if (loginBtn) {
-        loginBtn.addEventListener("click", function () {
-            alert("Login system is under development. OTP feature will be added in Step 3.");
-        });
-    }
-});
+header{
+    background:#111;
+    padding:20px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    border-bottom:2px solid #00ff88;
+}
+
+header h1{
+    color:#00ff88;
+}
+
+nav a{
+    color:white;
+    text-decoration:none;
+    margin:0 10px;
+    font-weight:bold;
+}
+
+nav a:hover{
+    color:#00ff88;
+}
+
+.hero{
+    text-align:center;
+    padding:100px 20px;
+}
+
+.hero h2{
+    font-size:42px;
+    color:#00ff88;
+}
+
+.hero p{
+    margin:20px 0;
+    font-size:20px;
+}
+
+.btn{
+    display:inline-block;
+    margin:10px;
+    padding:12px 25px;
+    background:#00ff88;
+    color:#000;
+    text-decoration:none;
+    border-radius:8px;
+    font-weight:bold;
+}
+
+.card{
+    background:#1b1b1b;
+    width:300px;
+    margin:20px auto;
+    padding:20px;
+    border-radius:12px;
+    border:1px solid #00ff88;
+    text-align:center;
+}
+
+footer{
+    text-align:center;
+    padding:20px;
+    margin-top:40px;
+    border-top:1px solid #333;
+}
