@@ -1,1 +1,12 @@
 script.js
+// BlackOps Arena Script
+
+document.addEventListener("DOMContentLoaded", function () {
+    const loginBtn = document.querySelector("button");
+
+    if (loginBtn) {
+        loginBtn.addEventListener("click", function () {
+            alert("Login system is under development. OTP feature will be added in Step 3.");
+        });
+    }
+});
