@@ -4,7 +4,6 @@
    ============================================ */
 
 :root {
-  /* Core Palette */
   --black: #050508;
   --charcoal: #0d0d14;
   --charcoal-light: #14141f;
@@ -21,31 +20,20 @@
   --muted-light: #B0B0C0;
   --success: #00E676;
   --danger: #FF3D57;
-
-  /* Glass */
   --glass: rgba(20, 20, 32, 0.65);
   --glass-border: rgba(255, 255, 255, 0.08);
   --glass-highlight: rgba(255, 255, 255, 0.04);
-
-  /* Typography */
   --font-display: 'Orbitron', sans-serif;
   --font-body: 'Inter', system-ui, sans-serif;
-
-  /* Spacing & Radius */
   --radius-sm: 8px;
   --radius-md: 12px;
   --radius-lg: 16px;
   --radius-xl: 24px;
-
-  /* Transitions */
   --ease: cubic-bezier(0.22, 1, 0.36, 1);
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
-
-  /* Header */
   --header-h: 72px;
 }
 
-/* Reset & Base */
 *, *::before, *::after {
   box-sizing: border-box;
   margin: 0;
@@ -81,7 +69,6 @@ button:focus-visible, a:focus-visible { outline: 2px solid var(--electric); outl
 
 .hidden { display: none !important; }
 
-/* Particle Canvas */
 #particle-canvas {
   position: fixed;
   inset: 0;
@@ -92,7 +79,6 @@ button:focus-visible, a:focus-visible { outline: 2px solid var(--electric); outl
   opacity: 0.6;
 }
 
-/* ========== HEADER ========== */
 .header {
   position: fixed;
   top: 0;
@@ -262,7 +248,6 @@ button:focus-visible, a:focus-visible { outline: 2px solid var(--electric); outl
   transform: translateY(-7px) rotate(-45deg);
 }
 
-/* Buttons */
 .btn {
   display: inline-flex;
   align-items: center;
@@ -294,12 +279,11 @@ button:focus-visible, a:focus-visible { outline: 2px solid var(--electric); outl
   color: var(--white);
   padding: 10px 20px;
   border: 1px solid var(--glass-border);
-  box-shadow: inset 0 0 0 0 var(--electric);
 }
 
 .btn-outline:hover {
   border-color: var(--electric);
-  box-shadow: 0 0 20px rgba(0, 200, 255, 0.2), inset 0 0 20px rgba(0, 200, 255, 0.05);
+  box-shadow: 0 0 20px rgba(0, 200, 255, 0.2);
   color: var(--electric);
 }
 
@@ -326,7 +310,6 @@ button:focus-visible, a:focus-visible { outline: 2px solid var(--electric); outl
   padding: 12px;
 }
 
-/* Ripple */
 .ripple {
   position: relative;
   overflow: hidden;
@@ -345,7 +328,6 @@ button:focus-visible, a:focus-visible { outline: 2px solid var(--electric); outl
   to { transform: scale(4); opacity: 0; }
 }
 
-/* ========== HERO ========== */
 .hero {
   position: relative;
   min-height: 100vh;
@@ -509,7 +491,6 @@ button:focus-visible, a:focus-visible { outline: 2px solid var(--electric); outl
   flex-direction: column;
   align-items: center;
   min-width: 100px;
-  position: relative;
 }
 
 .stat-value {
@@ -567,8 +548,7 @@ button:focus-visible, a:focus-visible { outline: 2px solid var(--electric); outl
 @keyframes scrollPulse {
   0%, 100% { opacity: 0.3; height: 30px; }
   50% { opacity: 1; height: 48px; }
-    }
-/* ========== SECTIONS ========== */
+ /* ========== SECTIONS ========== */
 .section {
   position: relative;
   padding: 100px 0;
@@ -931,8 +911,7 @@ button:focus-visible, a:focus-visible { outline: 2px solid var(--electric); outl
   font-weight: 700;
   color: var(--muted);
   margin-bottom: 10px;
-}
-
+   }  }
 /* ========== FEATURES ========== */
 .features-grid {
   display: grid;
@@ -1275,32 +1254,11 @@ button:focus-visible, a:focus-visible { outline: 2px solid var(--electric); outl
   opacity: 0.7;
 }
 
-/* ========== REVEAL ANIMATIONS ========== */
+/* ========== REVEAL ========== */
 .reveal {
-  opacity: 0;
-  transform: translateY(32px);
-  transition: opacity 0.7s var(--ease-out), transform 0.7s var(--ease-out);
+  opacity: 1 !important;
+  transform: none !important;
 }
-
-.reveal.visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.features-grid .reveal:nth-child(1) { transition-delay: 0.05s; }
-.features-grid .reveal:nth-child(2) { transition-delay: 0.1s; }
-.features-grid .reveal:nth-child(3) { transition-delay: 0.15s; }
-.features-grid .reveal:nth-child(4) { transition-delay: 0.2s; }
-.features-grid .reveal:nth-child(5) { transition-delay: 0.25s; }
-.features-grid .reveal:nth-child(6) { transition-delay: 0.3s; }
-
-.tournaments-grid .reveal:nth-child(1) { transition-delay: 0.05s; }
-.tournaments-grid .reveal:nth-child(2) { transition-delay: 0.12s; }
-.tournaments-grid .reveal:nth-child(3) { transition-delay: 0.2s; }
-
-.news-grid .reveal:nth-child(1) { transition-delay: 0.05s; }
-.news-grid .reveal:nth-child(2) { transition-delay: 0.12s; }
-.news-grid .reveal:nth-child(3) { transition-delay: 0.2s; }
 
 /* ========== RESPONSIVE ========== */
 @media (max-width: 1024px) {
@@ -1435,32 +1393,4 @@ button:focus-visible, a:focus-visible { outline: 2px solid var(--electric); outl
   .logo-text {
     font-size: 1rem;
   }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-  }
-  .reveal {
-    opacity: 1;
-    transform: none;
-  }
-                                                       }
-/* FORCE SHOW - Temporary Fix */
-.reveal {
-  opacity: 1 !important;
-  transform: none !important;
-}
-
-.hero-content,
-.section,
-.game-card,
-.tournament-card,
-.feature-card,
-.news-card,
-.leaderboard-table {
-  opacity: 1 !important;
-  visibility: visible !important;
-}
+     }
