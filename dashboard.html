@@ -206,12 +206,28 @@
 
 <div class="wrap">
 
-  <div class="hero">
+  
+<div class="hero">
+    <svg width="56" height="60" viewBox="0 0 140 150" xmlns="http://www.w3.org/2000/svg" style="margin-bottom:12px; filter: drop-shadow(0 0 8px rgba(212,178,58,0.5));">
+      <defs>
+        <linearGradient id="goldH" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#fff2c9"/>
+          <stop offset="45%" stop-color="#e0b23a"/>
+          <stop offset="100%" stop-color="#8a640f"/>
+        </linearGradient>
+        <linearGradient id="cyanH" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" stop-color="#a6f8ff"/>
+          <stop offset="100%" stop-color="#0891b2"/>
+        </linearGradient>
+      </defs>
+      <path d="M70 4 L130 24 L130 68 Q130 118 70 146 Q10 118 10 68 L10 24 Z" fill="#08090c" stroke="url(#goldH)" stroke-width="3.5"/>
+      <path d="M70 16 L118 32 L118 68 Q118 108 70 132 Q22 108 22 68 L22 32 Z" fill="none" stroke="url(#cyanH)" stroke-width="1.2" opacity="0.55"/>
+      <text x="70" y="90" font-family="Arial, Helvetica, sans-serif" font-size="40" font-weight="900" text-anchor="middle" fill="url(#goldH)">BOA</text>
+    </svg>
     <div class="hero-label">Welcome back,</div>
     <div class="hero-name" id="playerName">Player</div>
     <div class="hero-sub">Ready to drop into the arena?</div>
   </div>
-
   <div class="stats">
     <div class="stat"><div class="val">0</div><div class="lbl">Matches</div></div>
     <div class="stat"><div class="val">0</div><div class="lbl">Wins</div></div>
