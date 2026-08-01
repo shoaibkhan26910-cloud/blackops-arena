@@ -83,7 +83,7 @@
         }, 1200);
       })
       .catch((error) => {
-        let msg = "Kuch galat ho gaya. Dobara try karo.";
+        let msg = "Error: " + error.code;
         if (error.code === "auth/email-already-in-use") msg = "Ye email pehle se registered hai.";
         if (error.code === "auth/invalid-email") msg = "Email valid nahi hai.";
         if (error.code === "auth/weak-password") msg = "Password bahut weak hai.";
