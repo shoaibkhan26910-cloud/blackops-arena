@@ -1448,3 +1448,19 @@ button:focus-visible, a:focus-visible { outline: 2px solid var(--electric); outl
     transform: none;
   }
                                                        }
+/* FORCE SHOW - Temporary Fix */
+.reveal {
+  opacity: 1 !important;
+  transform: none !important;
+}
+
+.hero-content,
+.section,
+.game-card,
+.tournament-card,
+.feature-card,
+.news-card,
+.leaderboard-table {
+  opacity: 1 !important;
+  visibility: visible !important;
+}
