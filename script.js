@@ -310,3 +310,8 @@
     document.body.style.opacity = '1';
   });
 })();
+/* Temporary fix - force show content */
+.reveal {
+  opacity: 1 !important;
+  transform: none !important;
+}
