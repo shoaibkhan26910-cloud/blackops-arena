@@ -1,78 +1,412 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>BlackOps Arena</title>
-
-<link rel="stylesheet" href="style.css">
-
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="BlackOps Arena - India's Next Generation Esports Platform. Compete in tournaments, climb leaderboards, and win real rewards.">
+  <meta name="keywords" content="esports, gaming, tournaments, BlackOps Arena, competitive gaming, India esports">
+  <meta name="author" content="BlackOps Arena">
+  <meta name="theme-color" content="#0a0a0f">
+  <title>BlackOps Arena | India's Next Generation Esports Platform</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
+  <!-- Particle Canvas -->
+  <canvas id="particle-canvas" aria-hidden="true"></canvas>
 
-<header>
-<h1>🎮 BlackOps Arena</h1>
+  <!-- Header -->
+  <header class="header" id="header">
+    <div class="header-inner">
+      <a href="#home" class="logo" aria-label="BlackOps Arena Home">
+        <div class="logo-shield">
+          <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M32 4L8 14V30C8 44 18 54 32 60C46 54 56 44 56 30V14L32 4Z" stroke="url(#shieldGrad)" stroke-width="2.5" fill="rgba(0,200,255,0.08)"/>
+            <path d="M32 12L16 18V30C16 40 24 48 32 52C40 48 48 40 48 30V18L32 12Z" stroke="#D4AF37" stroke-width="1.5" fill="none"/>
+            <text x="32" y="36" text-anchor="middle" fill="#D4AF37" font-family="Orbitron" font-size="14" font-weight="700">BOA</text>
+            <defs>
+              <linearGradient id="shieldGrad" x1="0" y1="0" x2="64" y2="64">
+                <stop stop-color="#00C8FF"/>
+                <stop offset="1" stop-color="#D4AF37"/>
+              </linearGradient>
+            </defs>
+          </svg>
+        </div>
+        <span class="logo-text">BlackOps<span class="accent">Arena</span></span>
+      </a>
 
-<nav>
-<a href="index.html">Home</a>
-<a href="login.html">Login</a>
-<a href="signup.html">Signup</a>
-<a href="tournaments.html">Tournaments</a>
-<a href="profile.html">Profile</a>
-</nav>
+      <nav class="nav" id="nav" aria-label="Main navigation">
+        <ul class="nav-list">
+          <li><a href="#home" class="nav-link active">Home</a></li>
+          <li><a href="#tournaments" class="nav-link">Tournaments</a></li>
+          <li><a href="#leaderboard" class="nav-link">Leaderboards</a></li>
+          <li><a href="#rewards" class="nav-link">Rewards</a></li>
+          <li><a href="#shop" class="nav-link">Shop</a></li>
+          <li><a href="#news" class="nav-link">News</a></li>
+          <li><a href="#support" class="nav-link">Support</a></li>
+        </ul>
+      </nav>
 
-</header>
+      <div class="header-actions">
+        <button class="icon-btn notification-btn" aria-label="Notifications" id="notifBtn">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/>
+            <path d="M13.73 21a2 2 0 0 1-3.46 0"/>
+          </svg>
+          <span class="notif-badge">3</span>
+        </button>
+        <div class="auth-buttons" id="authButtons">
+          <button class="btn btn-ghost" id="loginBtn">Login</button>
+          <button class="btn btn-primary" id="registerBtn">Register</button>
+        </div>
+        <div class="user-menu hidden" id="userMenu">
+          <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=BlackOps" alt="User avatar" class="user-avatar" width="36" height="36">
+        </div>
+        <button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
 
-<section class="hero">
+  <main>
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+      <div class="hero-bg">
+        <div class="hero-grid"></div>
+        <div class="hero-glow hero-glow-1"></div>
+        <div class="hero-glow hero-glow-2"></div>
+        <div class="hero-glow hero-glow-3"></div>
+      </div>
+      <div class="hero-content">
+        <div class="hero-badge reveal">
+          <span class="pulse-dot"></span>
+          Season 4 Now Live
+        </div>
+        <h1 class="hero-title reveal">
+          India's Next Generation<br>
+          <span class="gradient-text">Esports Platform</span>
+        </h1>
+        <p class="hero-subtitle reveal">
+          Compete. Dominate. Conquer. Join thousands of elite players in high-stakes tournaments with instant rewards and fair-play guarantees.
+        </p>
+        <div class="hero-ctas reveal">
+          <a href="#tournaments" class="btn btn-primary btn-lg ripple">
+            <span>Join Tournament</span>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+          <a href="#games" class="btn btn-outline btn-lg ripple">Explore Games</a>
+        </div>
+        <div class="hero-stats reveal">
+          <div class="stat-item">
+            <span class="stat-value" data-target="128450">0</span>
+            <span class="stat-label">Active Players</span>
+          </div>
+          <div class="stat-divider"></div>
+          <div class="stat-item">
+            <span class="stat-value" data-target="342">0</span>
+            <span class="stat-label">Live Matches</span>
+          </div>
+          <div class="stat-divider"></div>
+          <div class="stat-item">
+            <span class="stat-value" data-target="45">0</span>
+            <span class="stat-prefix">₹</span>
+            <span class="stat-suffix">L+</span>
+            <span class="stat-label">Prize Pool</span>
+          </div>
+          <div class="stat-divider"></div>
+          <div class="stat-item">
+            <span class="stat-value" data-target="8920">0</span>
+            <span class="stat-label">Winners</span>
+          </div>
+        </div>
+      </div>
+      <div class="scroll-indicator">
+        <div class="scroll-line"></div>
+        <span>Scroll</span>
+      </div>
+    </section>
 
-<h2>India's No.1 Esports Tournament Platform</h2>
+    <!-- Featured Games -->
+    <section class="section games-section" id="games">
+      <div class="container">
+        <div class="section-header reveal">
+          <span class="section-tag">Featured</span>
+          <h2 class="section-title">Featured <span class="gradient-text">Games</span></h2>
+          <p class="section-desc">Dominate the battlefield in India's most competitive titles</p>
+        </div>
+        <div class="games-grid">
+          <article class="game-card reveal" data-tilt>
+            <div class="game-card-inner">
+              <div class="game-cover">
+                <div class="game-cover-img bgmi-cover"></div>
+                <div class="game-overlay"></div>
+                <span class="live-badge"><span class="live-dot"></span> LIVE</span>
+              </div>
+              <div class="game-info">
+                <h3 class="game-title">BGMI</h3>
+                <p class="game-players"><span class="player-count">48.2K</span> Active Players</p>
+                <a href="#tournaments" class="btn btn-primary btn-sm ripple">Join Tournament</a>
+              </div>
+            </div>
+          </article>
+          <article class="game-card reveal" data-tilt>
+            <div class="game-card-inner">
+              <div class="game-cover">
+                <div class="game-cover-img ff-cover"></div>
+                <div class="game-overlay"></div>
+                <span class="live-badge"><span class="live-dot"></span> LIVE</span>
+              </div>
+              <div class="game-info">
+                <h3 class="game-title">Free Fire MAX</h3>
+                <p class="game-players"><span class="player-count">36.7K</span> Active Players</p>
+                <a href="#tournaments" class="btn btn-primary btn-sm ripple">Join Tournament</a>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
 
-<p>Play BGMI & Free Fire tournaments. Win real cash prizes.</p>
+    <!-- Live Tournaments -->
+    <section class="section tournaments-section" id="tournaments">
+      <div class="container">
+        <div class="section-header reveal">
+          <span class="section-tag">Compete</span>
+          <h2 class="section-title">Live <span class="gradient-text">Tournaments</span></h2>
+          <p class="section-desc">Enter the arena. Claim your glory. Real prizes await.</p>
+        </div>
+        <div class="tournaments-grid">
+          <article class="tournament-card reveal" data-tilt>
+            <div class="tournament-banner bgmi-banner">
+              <div class="tournament-status live">LIVE</div>
+            </div>
+            <div class="tournament-body">
+              <h3 class="tournament-name">BGMI Night Ops Championship</h3>
+              <div class="tournament-meta">
+                <div class="meta-item">
+                  <span class="meta-label">Entry Fee</span>
+                  <span class="meta-value">₹49</span>
+                </div>
+                <div class="meta-item">
+                  <span class="meta-label">Prize Pool</span>
+                  <span class="meta-value gold">₹25,000</span>
+                </div>
+                <div class="meta-item">
+                  <span class="meta-label">Slots Left</span>
+                  <span class="meta-value">12/64</span>
+                </div>
+              </div>
+              <div class="tournament-timer">
+                <span class="timer-label">Starts in</span>
+                <div class="countdown" data-time="3600">
+                  <span class="time-unit"><span class="time-val" data-unit="h">00</span><span class="time-label">H</span></span>
+                  <span class="time-sep">:</span>
+                  <span class="time-unit"><span class="time-val" data-unit="m">00</span><span class="time-label">M</span></span>
+                  <span class="time-sep">:</span>
+                  <span class="time-unit"><span class="time-val" data-unit="s">00</span><span class="time-label">S</span></span>
+                </div>
+              </div>
+              <button class="btn btn-primary btn-block ripple">Join Now</button>
+            </div>
+          </article>
 
-<a href="login.html" class="btn">Login Now</a>
+          <article class="tournament-card reveal" data-tilt>
+            <div class="tournament-banner ff-banner">
+              <div class="tournament-status upcoming">UPCOMING</div>
+            </div>
+            <div class="tournament-body">
+              <h3 class="tournament-name">Free Fire MAX Clash Royale</h3>
+              <div class="tournament-meta">
+                <div class="meta-item">
+                  <span class="meta-label">Entry Fee</span>
+                  <span class="meta-value">₹29</span>
+                </div>
+                <div class="meta-item">
+                  <span class="meta-label">Prize Pool</span>
+                  <span class="meta-value gold">₹15,000</span>
+                </div>
+                <div class="meta-item">
+                  <span class="meta-label">Slots Left</span>
+                  <span class="meta-value">28/48</span>
+                </div>
+              </div>
+              <div class="tournament-timer">
+                <span class="timer-label">Starts in</span>
+                <div class="countdown" data-time="7200">
+                  <span class="time-unit"><span class="time-val" data-unit="h">00</span><span class="time-label">H</span></span>
+                  <span class="time-sep">:</span>
+                  <span class="time-unit"><span class="time-val" data-unit="m">00</span><span class="time-label">M</span></span>
+                  <span class="time-sep">:</span>
+                  <span class="time-unit"><span class="time-val" data-unit="s">00</span><span class="time-label">S</span></span>
+                </div>
+              </div>
+              <button class="btn btn-primary btn-block ripple">Join Now</button>
+            </div>
+          </article>
 
-<a href="signup.html" class="btn">Create Account</a>
+          <article class="tournament-card reveal" data-tilt>
+            <div class="tournament-banner bgmi-banner-2">
+              <div class="tournament-status live">LIVE</div>
+            </div>
+            <div class="tournament-body">
+              <h3 class="tournament-name">BGMI Duo Domination Series</h3>
+              <div class="tournament-meta">
+                <div class="meta-item">
+                  <span class="meta-label">Entry Fee</span>
+                  <span class="meta-value">₹99</span>
+                </div>
+                <div class="meta-item">
+                  <span class="meta-label">Prize Pool</span>
+                  <span class="meta-value gold">₹50,000</span>
+                </div>
+                <div class="meta-item">
+                  <span class="meta-label">Slots Left</span>
+                  <span class="meta-value">5/32</span>
+                </div>
+              </div>
+              <div class="tournament-timer">
+                <span class="timer-label">Starts in</span>
+                <div class="countdown" data-time="1800">
+                  <span class="time-unit"><span class="time-val" data-unit="h">00</span><span class="time-label">H</span></span>
+                  <span class="time-sep">:</span>
+                  <span class="time-unit"><span class="time-val" data-unit="m">00</span><span class="time-label">M</span></span>
+                  <span class="time-sep">:</span>
+                  <span class="time-unit"><span class="time-val" data-unit="s">00</span><span class="time-label">S</span></span>
+                </div>
+              </div>
+              <button class="btn btn-primary btn-block ripple">Join Now</button>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
 
-</section>
+    <!-- Why Choose -->
+    <section class="section why-section" id="rewards">
+      <div class="container">
+        <div class="section-header reveal">
+          <span class="section-tag">Advantage</span>
+          <h2 class="section-title">Why Choose <span class="gradient-text">BlackOps Arena</span></h2>
+          <p class="section-desc">Built for champions who demand excellence</p>
+        </div>
+        <div class="features-grid">
+          <article class="feature-card reveal">
+            <div class="feature-icon">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                <path d="M9 12l2 2 4-4"/>
+              </svg>
+            </div>
+            <h3>Fair Play</h3>
+            <p>AI-powered anti-cheat and strict moderation ensure every match is decided by skill alone.</p>
+          </article>
+          <article class="feature-card reveal">
+            <div class="feature-icon">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                <circle cx="12" cy="12" r="10"/>
+                <path d="M12 6v6l4 2"/>
+              </svg>
+            </div>
+            <h3>Instant Rewards</h3>
+            <p>Win and withdraw within minutes. Transparent payouts with zero hidden fees.</p>
+          </article>
+          <article class="feature-card reveal">
+            <div class="feature-icon">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                <rect x="3" y="11" width="18" height="11" rx="2"/>
+                <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+              </svg>
+            </div>
+            <h3>Secure Platform</h3>
+            <p>Bank-grade encryption and 2FA protect your account and earnings at every step.</p>
+          </article>
+          <article class="feature-card reveal">
+            <div class="feature-icon">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+              </svg>
+            </div>
+            <h3>Fast Matchmaking</h3>
+            <p>Advanced skill-based matching gets you into competitive games in under 30 seconds.</p>
+          </article>
+          <article class="feature-card reveal">
+            <div class="feature-icon">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                <path d="M18 20V10M12 20V4M6 20v-6"/>
+              </svg>
+            </div>
+            <h3>Live Leaderboards</h3>
+            <p>Real-time rankings update every match. Track your climb to the top in real time.</p>
+          </article>
+          <article class="feature-card reveal">
+            <div class="feature-icon">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+              </svg>
+            </div>
+            <h3>Pro Experience</h3>
+            <p>Tournament formats, streams, and production quality built to pro esports standards.</p>
+          </article>
+        </div>
+      </div>
+    </section>
 
-<section class="games">
+    <!-- Leaderboard Preview -->
+    <section class="section leaderboard-section" id="leaderboard">
+      <div class="container">
+        <div class="section-header reveal">
+          <span class="section-tag">Rankings</span>
+          <h2 class="section-title">Top <span class="gradient-text">Players</span></h2>
+          <p class="section-desc">The elite who currently own the Arena</p>
+        </div>
+        <div class="leaderboard-table reveal">
+          <div class="lb-header">
+            <span>Rank</span>
+            <span>Player</span>
+            <span>Wins</span>
+            <span>Earnings</span>
+          </div>
+          <div class="lb-body" id="leaderboardBody">
+            <!-- Populated by JS -->
+          </div>
+        </div>
+        <div class="lb-cta reveal">
+          <a href="#leaderboard" class="btn btn-outline ripple">View Full Leaderboard</a>
+        </div>
+      </div>
+    </section>
 
-<h2>Popular Games</h2>
-
-<div class="card">
-<h3>BGMI</h3>
-<p>Daily Custom Rooms & Tournaments</p>
-</div>
-
-<div class="card">
-<h3>Free Fire MAX</h3>
-<p>Play Daily & Win Rewards</p>
-</div>
-
-</section>
-
-<section class="games">
-
-<h2>Quick Links</h2>
-
-<div class="card">
-<a href="tournaments.html">🏆 Join Tournament</a>
-</div>
-
-<div class="card">
-<a href="profile.html">👤 My Profile</a>
-</div>
-
-</section>
-
-<footer>
-
-<p>© 2026 BlackOps Arena | All Rights Reserved</p>
-
-</footer>
-
-<script src="script.js"></script>
-
-</body>
-</html>
+    <!-- Latest News -->
+    <section class="section news-section" id="news">
+      <div class="container">
+        <div class="section-header reveal">
+          <span class="section-tag">Updates</span>
+          <h2 class="section-title">Latest <span class="gradient-text">News</span></h2>
+          <p class="section-desc">Stay ahead of the meta and tournament circuit</p>
+        </div>
+        <div class="news-grid">
+          <article class="news-card reveal" data-tilt>
+            <div class="news-thumb news-thumb-1"></div>
+            <div class="news-body">
+              <time datetime="2026-07-28" class="news-date">Jul 28, 2026</time>
+              <h3 class="news-title">Season 4 Launch: New Maps & Double Prize Weekends</h3>
+              <a href="#" class="news-link">Read More <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+            </div>
+          </article>
+          <article class="news-card reveal" data-tilt>
+            <div class="news-thumb news-thumb-2"></div>
+            <div class="news-body">
+              <time datetime="2026-07-22" class="news-date">Jul 22, 2026</time>
+              <h3 class="news-title">BlackOps Arena Partners with Top Streamers for Pro Series</h3>
+              <a href="#" class="news-link">Read More <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+            </div>
+          </article>
+          <article class="news-card reveal" data-tilt>
+            <div class="news-thumb news-thumb-3"></div>
+            <div class="news-body">
+              <time datetime="2026-07-15" class="news-date">Jul 15, 2026</time>
+              <h3 class="news-title">Anti-Cheat 3.0 Rolls Out — Fair Play Elevated</h3>
+              <a href="#" class="news-link">Read
