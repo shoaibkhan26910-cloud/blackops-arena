@@ -88,15 +88,14 @@
     signInWithEmailAndPassword
   } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
-  // 🔑 Apna Firebase config yahan daalo
   const firebaseConfig = {
-  apiKey: "AIzaSyD4Dx0-YaFzspPqRh0gqINFqOQCl1GDgIA",
-  authDomain: "blackops-arena.firebaseapp.com",
-  projectId: "blackops-arena",
-  storageBucket: "blackops-arena.firebasestorage.app",
-  messagingSenderId: "942341854858",
-  appId: "1:942341854858:web:f56a9cf0374304aaa03f73"
-};
+    apiKey: "AIzaSyD4Dx0-YaFzspPqRh0gqINFqOQCl1GDgIA",
+    authDomain: "blackops-arena.firebaseapp.com",
+    projectId: "blackops-arena",
+    storageBucket: "blackops-arena.firebasestorage.app",
+    messagingSenderId: "942341854858",
+    appId: "1:942341854858:web:f56a9cf0374304aaa03f73"
+  };
 
   const app = initializeApp(firebaseConfig);
   const auth = getAuth(app);
@@ -123,12 +122,7 @@
         }, 1000);
       })
       .catch((error) => {
-        let msg = "Login fail ho gaya. Dobara try karo.";
-        if (error.code === "auth/user-not-found") msg = "Ye email registered nahi hai.";
-        if (error.code === "auth/wrong-password") msg = "Password galat hai.";
-        if (error.code === "auth/invalid-email") msg = "Email valid nahi hai.";
-        if (error.code === "auth/invalid-credential") msg = "Email ya password galat hai.";
-        messageBox.textContent = msg;
+        messageBox.textContent = "Error: " + error.code;
         messageBox.classList.add("error");
       });
   };
