@@ -4,41 +4,234 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Tournaments - BlackOps Arena</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Arial, sans-serif; }
 
-<link rel="stylesheet" href="style.css">
+  :root {
+    --neon: #00ff7f;
+    --gold: #e0b23a;
+    --cyan: #0891b2;
+    --card: rgba(255, 255, 255, 0.04);
+    --card-border: rgba(0, 255, 127, 0.18);
+    --text-dim: #9a9a9a;
+  }
+
+  body {
+    background: radial-gradient(circle at 20% 0%, #0c1a12 0%, #050505 45%);
+    color: #fff;
+    min-height: 100vh;
+    padding-bottom: 90px;
+  }
+
+  .topbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 18px 20px;
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    background: rgba(5,5,5,0.85);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--card-border);
+  }
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 800;
+    font-size: 18px;
+  }
+  .brand span.dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--neon);
+    box-shadow: 0 0 8px var(--neon), 0 0 16px var(--neon);
+  }
+  .back-btn {
+    width: 40px; height: 40px;
+    border-radius: 12px;
+    background: var(--card);
+    border: 1px solid var(--card-border);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px;
+    color: #fff;
+    text-decoration: none;
+  }
+
+  .wrap { padding: 20px; max-width: 480px; margin: 0 auto; }
+
+  .page-title { font-size: 20px; font-weight: 800; margin-bottom: 4px; }
+  .page-sub { font-size: 13px; color: var(--text-dim); margin-bottom: 20px; }
+
+  .tabs {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 20px;
+  }
+  .tab {
+    flex: 1;
+    text-align: center;
+    padding: 10px;
+    border-radius: 12px;
+    background: var(--card);
+    border: 1px solid var(--card-border);
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--text-dim);
+  }
+  .tab.active {
+    color: #000;
+    background: var(--neon);
+    border-color: var(--neon);
+  }
+
+  .t-card {
+    background: var(--card);
+    border: 1px solid var(--card-border);
+    border-radius: 18px;
+    overflow: hidden;
+    margin-bottom: 18px;
+    animation: fadeUp 0.5s ease both;
+  }
+  .t-banner {
+    padding: 18px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: linear-gradient(135deg, rgba(224,178,58,0.12), rgba(8,145,178,0.06));
+    border-bottom: 1px solid var(--card-border);
+  }
+  .t-icon { font-size: 30px; }
+  .t-game { font-size: 16px; font-weight: 800; }
+  .t-status {
+    margin-left: auto;
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--neon);
+    background: rgba(0,255,127,0.1);
+    border: 1px solid var(--neon-dim);
+    padding: 4px 10px;
+    border-radius: 20px;
+  }
+
+  .t-body { padding: 16px 18px; }
+  .t-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 8px;
+    margin-bottom: 16px;
+  }
+  .t-stat {
+    text-align: center;
+    background: rgba(255,255,255,0.03);
+    border-radius: 10px;
+    padding: 8px 4px;
+  }
+  .t-stat .v { font-size: 14px; font-weight: 800; color: var(--gold); }
+  .t-stat .l { font-size: 10px; color: var(--text-dim); margin-top: 2px; }
+
+  .t-join {
+    width: 100%;
+    padding: 13px;
+    border: none;
+    border-radius: 12px;
+    background: linear-gradient(135deg, var(--neon), #00c766);
+    color: #000;
+    font-weight: 800;
+    font-size: 14px;
+    text-align: center;
+    text-decoration: none;
+    display: block;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .bottom-nav {
+    position: fixed;
+    bottom: 0; left: 0; right: 0;
+    background: rgba(8,8,8,0.92);
+    backdrop-filter: blur(14px);
+    border-top: 1px solid var(--card-border);
+    display: flex;
+    justify-content: space-around;
+    padding: 10px 0 14px;
+    z-index: 30;
+  }
+  .nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3px;
+    color: var(--text-dim);
+    text-decoration: none;
+    font-size: 10px;
+    background: none;
+    border: none;
+  }
+  .nav-item.active { color: var(--neon); }
+  .nav-item .n-icon { font-size: 19px; }
+</style>
 </head>
-
 <body>
 
-<h1 align="center">🏆 BlackOps Arena Tournaments</h1>
-
-<div class="card">
-<h2>BGMI Tournament</h2>
-
-<p>Prize Pool: ₹10,000</p>
-
-<p>Date: Coming Soon</p>
-
-<p>Status: Registration Open</p>
-
-<button>Join Tournament</button>
-
+<div class="topbar">
+  <a href="dashboard.html" class="back-btn">←</a>
+  <div class="brand"><span class="dot"></span> Tournaments</div>
+  <div style="width:40px;"></div>
 </div>
 
-<br>
+<div class="wrap">
+  <div class="page-title">Active Tournaments</div>
+  <div class="page-sub">Choose your battlefield and register now</div>
 
-<div class="card">
+  <div class="tabs">
+    <div class="tab active">All</div>
+    <div class="tab">BGMI</div>
+    <div class="tab">Free Fire</div>
+  </div>
 
-<h2>Free Fire Tournament</h2>
+  <div class="t-card">
+    <div class="t-banner">
+      <div class="t-icon">🎯</div>
+      <div class="t-game">BGMI Tournament</div>
+      <div class="t-status">Open</div>
+    </div>
+    <div class="t-body">
+      <div class="t-stats">
+        <div class="t-stat"><div class="v">₹10,000</div><div class="l">Prize Pool</div></div>
+        <div class="t-stat"><div class="v">Free</div><div class="l">Entry Fee</div></div>
+        <div class="t-stat"><div class="v">TBA</div><div class="l">Match Date</div></div>
+      </div>
+      <a href="tournament-details.html?game=bgmi" class="t-join">Join Tournament</a>
+    </div>
+  </div>
 
-<p>Prize Pool: ₹5,000</p>
+  <div class="t-card">
+    <div class="t-banner">
+      <div class="t-icon">🔥</div>
+      <div class="t-game">Free Fire MAX Tournament</div>
+      <div class="t-status">Open</div>
+    </div>
+    <div class="t-body">
+      <div class="t-stats">
+        <div class="t-stat"><div class="v">₹5,000</div><div class="l">Prize Pool</div></div>
+        <div class="t-stat"><div class="v">Free</div><div class="l">Entry Fee</div></div>
+        <div class="t-stat"><div class="v">TBA</div><div class="l">Match Date</div></div>
+      </div>
+      <a href="tournament-details.html?game=freefire" class="t-join">Join Tournament</a>
+    </div>
+  </div>
+</div>
 
-<p>Date: Coming Soon</p>
-
-<p>Status: Registration Open</p>
-
-<button>Join Tournament</button>
-
+<div class="bottom-nav">
+  <a href="dashboard.html" class="nav-item"><span class="n-icon">🏠</span>Home</a>
+  <a href="tournaments.html" class="nav-item active"><span class="n-icon">🏆</span>Tournaments</a>
+  <a href="#" class="nav-item" onclick="alert('Wallet coming soon!'); return false;"><span class="n-icon">💰</span>Wallet</a>
+  <a href="profile.html" class="nav-item"><span class="n-icon">👤</span>Profile</a>
+  <a href="login.html" class="nav-item"><span class="n-icon">🚪</span>Logout</a>
 </div>
 
 </body>
