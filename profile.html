@@ -1,41 +1,341 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Player Profile</title>
-<link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+  <title>JARVIS 2050 — AI Intelligence System</title>
+
+  <meta name="theme-color" content="#050300">
+  <meta name="description" content="JARVIS 2050 Advanced Artificial Intelligence Interface">
+
+  <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-<h1 align="center">👤 Player Profile</h1>
+  <!-- BACKGROUND -->
+  <div class="space-bg"></div>
+  <div class="grid-bg"></div>
+  <div class="noise"></div>
 
-<form>
+  <!-- TOP BAR -->
+  <header class="topbar">
 
-<label>Full Name</label><br>
-<input type="text" placeholder="Enter Full Name"><br><br>
+    <div class="brand">
+      <div class="brand-orb"></div>
+      <div>
+        <strong>JARVIS</strong>
+        <span>2050 INTELLIGENCE SYSTEM</span>
+      </div>
+    </div>
 
-<label>Email</label><br>
-<input type="email" placeholder="Enter Email"><br><br>
+    <div class="system-status">
+      <span class="status-dot"></span>
+      <span id="systemStatus">SYSTEM ONLINE</span>
+    </div>
 
-<label>Mobile Number</label><br>
-<input type="text" placeholder="Enter Mobile"><br><br>
+    <div class="top-time">
+      <span id="clock">00:00:00</span>
+      <small id="date">---</small>
+    </div>
 
-<label>BGMI UID</label><br>
-<input type="text" placeholder="Enter BGMI UID"><br><br>
+  </header>
 
-<label>Free Fire UID</label><br>
-<input type="text" placeholder="Enter Free Fire UID"><br><br>
 
-<label>Team Name</label><br>
-<input type="text" placeholder="Enter Team Name"><br><br>
+  <!-- MAIN INTERFACE -->
+  <main class="interface">
 
-<button type="submit">Save Profile</button>
+    <!-- LEFT HOLOGRAPHIC PANEL -->
+    <aside class="side-panel left-panel">
 
-</form>
+      <div class="panel-title">
+        <span>◈</span> SYSTEM TELEMETRY
+      </div>
 
-<script src="script.js"></script>
+      <div class="telemetry">
+
+        <div class="telemetry-row">
+          <span>NEURAL LOAD</span>
+          <strong id="neuralLoad">72%</strong>
+        </div>
+        <div class="meter">
+          <i id="neuralMeter"></i>
+        </div>
+
+        <div class="telemetry-row">
+          <span>PROCESSING</span>
+          <strong id="processing">94%</strong>
+        </div>
+        <div class="meter">
+          <i id="processingMeter"></i>
+        </div>
+
+        <div class="telemetry-row">
+          <span>MEMORY</span>
+          <strong id="memory">61%</strong>
+        </div>
+        <div class="meter">
+          <i id="memoryMeter"></i>
+        </div>
+
+        <div class="telemetry-row">
+          <span>QUANTUM CORE</span>
+          <strong class="online">ONLINE</strong>
+        </div>
+
+      </div>
+
+
+      <div class="mini-chart">
+        <div class="chart-label">NEURAL ACTIVITY</div>
+
+        <div class="bars">
+          <i></i><i></i><i></i><i></i><i></i>
+          <i></i><i></i><i></i><i></i><i></i>
+          <i></i><i></i><i></i><i></i><i></i>
+        </div>
+      </div>
+
+
+      <div class="panel-title second">
+        <span>◈</span> SECURITY
+      </div>
+
+      <div class="security">
+        <div><span class="secure-dot"></span> FIREWALL</div>
+        <div><span class="secure-dot"></span> ENCRYPTION</div>
+        <div><span class="secure-dot"></span> THREAT SCAN</div>
+        <div><span class="secure-dot"></span> CORE PROTECTION</div>
+      </div>
+
+    </aside>
+
+
+    <!-- CENTRAL AI CORE -->
+    <section class="core-zone">
+
+      <div class="core-label top-label">
+        <span>JARVIS</span>
+        <small>ARTIFICIAL GENERAL INTELLIGENCE</small>
+      </div>
+
+
+      <div class="ai-core">
+
+        <!-- RADAR -->
+        <div class="radar">
+          <div class="radar-sweep"></div>
+          <div class="radar-ring r1"></div>
+          <div class="radar-ring r2"></div>
+          <div class="radar-ring r3"></div>
+        </div>
+
+
+        <!-- ORBITS -->
+        <div class="orbit orbit-1"></div>
+        <div class="orbit orbit-2"></div>
+        <div class="orbit orbit-3"></div>
+        <div class="orbit orbit-4"></div>
+
+
+        <!-- PARTICLES -->
+        <div class="particles" id="particles"></div>
+
+
+        <!-- CORE SPHERE -->
+        <div class="core-sphere">
+
+          <div class="core-inner">
+            <div class="energy-ring"></div>
+            <div class="energy-ring ring-two"></div>
+            <div class="energy-ring ring-three"></div>
+
+            <div class="core-light"></div>
+
+            <div class="core-text">
+              <strong>J</strong>
+              <span>CORE</span>
+            </div>
+          </div>
+
+        </div>
+
+
+        <!-- ENERGY BEAMS -->
+        <div class="beam beam-1"></div>
+        <div class="beam beam-2"></div>
+        <div class="beam beam-3"></div>
+        <div class="beam beam-4"></div>
+
+      </div>
+
+
+      <div class="core-status">
+
+        <div>
+          <span class="tiny-dot"></span>
+          NEURAL NETWORK ACTIVE
+        </div>
+
+        <div>
+          <span class="tiny-dot"></span>
+          QUANTUM PROCESSING
+        </div>
+
+        <div>
+          <span class="tiny-dot"></span>
+          ENVIRONMENT SCANNING
+        </div>
+
+      </div>
+
+
+      <!-- VOICE WAVE -->
+      <div class="voice-area">
+
+        <div class="voice-title">
+          <span id="voiceState">JARVIS READY</span>
+        </div>
+
+        <div class="waveform" id="waveform">
+          <i></i><i></i><i></i><i></i><i></i>
+          <i></i><i></i><i></i><i></i><i></i>
+          <i></i><i></i><i></i><i></i><i></i>
+          <i></i><i></i><i></i><i></i><i></i>
+          <i></i>
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- RIGHT PANEL -->
+    <aside class="side-panel right-panel">
+
+      <div class="panel-title">
+        <span>◈</span> AI ANALYSIS
+      </div>
+
+      <div class="analysis">
+
+        <div class="analysis-item">
+          <span>COGNITIVE STATE</span>
+          <strong>OPTIMAL</strong>
+        </div>
+
+        <div class="analysis-item">
+          <span>PREDICTION ENGINE</span>
+          <strong>ACTIVE</strong>
+        </div>
+
+        <div class="analysis-item">
+          <span>VISION SYSTEM</span>
+          <strong>READY</strong>
+        </div>
+
+        <div class="analysis-item">
+          <span>DECISION MATRIX</span>
+          <strong>CALCULATING</strong>
+        </div>
+
+      </div>
+
+
+      <div class="panel-title second">
+        <span>◈</span> LIVE DATA
+      </div>
+
+      <div class="data-stream" id="dataStream">
+        <div>> INITIALIZING NEURAL LINK...</div>
+        <div>> CONNECTING QUANTUM CORE...</div>
+        <div>> SCANNING ENVIRONMENT...</div>
+        <div>> ANALYZING DATA STREAM...</div>
+      </div>
+
+
+      <div class="panel-title second">
+        <span>◈</span> NETWORK
+      </div>
+
+      <div class="network">
+        <div class="network-circle">
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+
+        <div class="network-text">
+          <strong id="networkValue">99.8%</strong>
+          <small>NETWORK STABILITY</small>
+        </div>
+      </div>
+
+    </aside>
+
+  </main>
+
+
+  <!-- BOTTOM COMMAND SYSTEM -->
+  <section class="command-system">
+
+    <button class="voice-button" id="voiceButton" aria-label="Voice command">
+      <span class="mic-icon">◉</span>
+      <span>VOICE</span>
+    </button>
+
+
+    <form class="command-box" id="commandForm">
+
+      <span class="command-symbol">›</span>
+
+      <input
+        type="text"
+        id="commandInput"
+        autocomplete="off"
+        placeholder="Command JARVIS..."
+      >
+
+      <button type="submit">
+        SEND
+      </button>
+
+    </form>
+
+
+    <button class="clear-button" id="clearButton">
+      CLEAR
+    </button>
+
+  </section>
+
+
+  <!-- RESPONSE PANEL -->
+  <section class="response-panel" id="responsePanel">
+
+    <div class="response-header">
+      <span>JARVIS RESPONSE</span>
+      <button id="closeResponse">×</button>
+    </div>
+
+    <div class="response-content" id="responseContent">
+      Systems initialized. Awaiting command.
+    </div>
+
+  </section>
+
+
+  <!-- FOOTER -->
+  <footer>
+    <span>JARVIS 2050</span>
+    <span>ADVANCED INTELLIGENCE ARCHITECTURE</span>
+    <span id="footerTime">SYSTEM TIME --:--:--</span>
+  </footer>
+
+
+  <script src="script.js"></script>
 
 </body>
 </html>
