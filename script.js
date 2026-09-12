@@ -1,317 +1,590 @@
-/**
- * BlackOps Arena — Premium Homepage Scripts
- * Original vanilla JS — particles, counters, timers, tilt, reveal
- */
 
-(() => {
-  'use strict';
+/* =========================================================
+   JARVIS 2050
+   FUTURISTIC AI SYSTEM
+   ========================================================= */
 
-  // ========== PARTICLE SYSTEM ==========
-  const canvas = document.getElementById('particle-canvas');
-  if (canvas) {
-    const ctx = canvas.getContext('2d');
-    let particles = [];
-    let w, h;
+"use strict";
 
-    const resize = () => {
-      w = canvas.width = window.innerWidth;
-      h = canvas.height = window.innerHeight;
-    };
 
-    class Particle {
-      constructor() {
-        this.reset(true);
-      }
-      reset(init = false) {
-        this.x = Math.random() * w;
-        this.y = init ? Math.random() * h : h + 10;
-        this.size = Math.random() * 1.8 + 0.4;
-        this.speedY = Math.random() * 0.4 + 0.1;
-        this.speedX = (Math.random() - 0.5) * 0.3;
-        this.opacity = Math.random() * 0.5 + 0.1;
-        this.color = Math.random() > 0.7
-          ? `rgba(212, 175, 55, ${this.opacity})`
-          : `rgba(0, 200, 255, ${this.opacity})`;
-      }
-      update() {
-        this.y -= this.speedY;
-        this.x += this.speedX;
-        if (this.y < -10 || this.x < -10 || this.x > w + 10) this.reset();
-      }
-      draw() {
-        ctx.beginPath();
-        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-        ctx.fillStyle = this.color;
-        ctx.fill();
-      }
-    }
+/* ================= ELEMENTS ================= */
 
-    const initParticles = () => {
-      const count = Math.min(Math.floor((w * h) / 18000), 80);
-      particles = Array.from({ length: count }, () => new Particle());
-    };
+const clock = document.getElementById("clock");
+const dateElement = document.getElementById("date");
+const footerTime = document.getElementById("footerTime");
 
-    const animate = () => {
-      ctx.clearRect(0, 0, w, h);
-      particles.forEach(p => {
-        p.update();
-        p.draw();
-      });
-      for (let i = 0; i < particles.length; i++) {
-        for (let j = i + 1; j < particles.length; j++) {
-          const dx = particles[i].x - particles[j].x;
-          const dy = particles[i].y - particles[j].y;
-          const dist = Math.sqrt(dx * dx + dy * dy);
-          if (dist < 120) {
-            ctx.beginPath();
-            ctx.strokeStyle = `rgba(0, 200, 255, ${0.06 * (1 - dist / 120)})`;
-            ctx.lineWidth = 0.5;
-            ctx.moveTo(particles[i].x, particles[i].y);
-            ctx.lineTo(particles[j].x, particles[j].y);
-            ctx.stroke();
-          }
-        }
-      }
-      requestAnimationFrame(animate);
-    };
+const particlesContainer = document.getElementById("particles");
 
-    resize();
-    initParticles();
-    animate();
+const commandForm = document.getElementById("commandForm");
+const commandInput = document.getElementById("commandInput");
 
-    let resizeTimer;
-    window.addEventListener('resize', () => {
-      clearTimeout(resizeTimer);
-      resizeTimer = setTimeout(() => {
-        resize();
-        initParticles();
-      }, 150);
-    });
+const voiceButton = document.getElementById("voiceButton");
+const voiceState = document.getElementById("voiceState");
+
+const responsePanel = document.getElementById("responsePanel");
+const responseContent = document.getElementById("responseContent");
+const closeResponse = document.getElementById("closeResponse");
+
+const clearButton = document.getElementById("clearButton");
+
+const dataStream = document.getElementById("dataStream");
+
+const neuralLoad = document.getElementById("neuralLoad");
+const processing = document.getElementById("processing");
+const memory = document.getElementById("memory");
+
+const neuralMeter = document.getElementById("neuralMeter");
+const processingMeter = document.getElementById("processingMeter");
+const memoryMeter = document.getElementById("memoryMeter");
+
+const networkValue = document.getElementById("networkValue");
+
+
+/* ================= CLOCK ================= */
+
+function updateClock() {
+
+  const now = new Date();
+
+  const time = now.toLocaleTimeString("en-IN", {
+    hour12: false
+  });
+
+  const date = now.toLocaleDateString("en-IN", {
+    day: "2-digit",
+    month: "short",
+    year: "numeric"
+  });
+
+  clock.textContent = time;
+  dateElement.textContent = date.toUpperCase();
+  footerTime.textContent = "SYSTEM TIME " + time;
+}
+
+setInterval(updateClock, 1000);
+updateClock();
+
+
+/* ================= PARTICLES ================= */
+
+function createParticles() {
+
+  if (!particlesContainer) return;
+
+  particlesContainer.innerHTML = "";
+
+  const total = window.innerWidth < 600 ? 90 : 180;
+
+  for (let i = 0; i < total; i++) {
+
+    const particle = document.createElement("span");
+
+    particle.className = "particle";
+
+    const angle = Math.random() * Math.PI * 2;
+    const radius = 8 + Math.random() * 42;
+
+    const x =
+      50 +
+      Math.cos(angle) * radius;
+
+    const y =
+      50 +
+      Math.sin(angle) * radius;
+
+    particle.style.left = x + "%";
+    particle.style.top = y + "%";
+
+    const size = Math.random() * 2.5 + 1;
+
+    particle.style.width = size + "px";
+    particle.style.height = size + "px";
+
+    particle.style.opacity =
+      (Math.random() * 0.75 + 0.25).toFixed(2);
+
+    particle.style.animationDelay =
+      Math.random() * -5 + "s";
+
+    particlesContainer.appendChild(particle);
   }
+}
 
-  // ========== HEADER SCROLL ==========
-  const header = document.getElementById('header');
-  const onScroll = () => {
-    if (window.scrollY > 40) {
-      header.classList.add('scrolled');
-    } else {
-      header.classList.remove('scrolled');
-    }
-  };
-  window.addEventListener('scroll', onScroll, { passive: true });
-  onScroll();
+createParticles();
 
-  // ========== MOBILE NAV ==========
-  const hamburger = document.getElementById('hamburger');
-  const nav = document.getElementById('nav');
+window.addEventListener("resize", createParticles);
 
-  if (hamburger && nav) {
-    hamburger.addEventListener('click', () => {
-      const open = hamburger.getAttribute('aria-expanded') === 'true';
-      hamburger.setAttribute('aria-expanded', String(!open));
-      nav.classList.toggle('open', !open);
-      document.body.style.overflow = open ? '' : 'hidden';
-    });
 
-    nav.querySelectorAll('.nav-link').forEach(link => {
-      link.addEventListener('click', () => {
-        hamburger.setAttribute('aria-expanded', 'false');
-        nav.classList.remove('open');
-        document.body.style.overflow = '';
-      });
-    });
-  }
+/* ================= RANDOM TELEMETRY ================= */
 
-  // ========== ACTIVE NAV LINK ==========
-  const sections = document.querySelectorAll('section[id]');
-  const navLinks = document.querySelectorAll('.nav-link');
+function randomNumber(min, max) {
+  return Math.floor(
+    Math.random() * (max - min + 1) + min
+  );
+}
 
-  const updateActiveNav = () => {
-    const scrollY = window.scrollY + 120;
-    sections.forEach(sec => {
-      const top = sec.offsetTop;
-      const height = sec.offsetHeight;
-      const id = sec.getAttribute('id');
-      if (scrollY >= top && scrollY < top + height) {
-        navLinks.forEach(l => {
-          l.classList.toggle('active', l.getAttribute('href') === `#${id}`);
-        });
-      }
-    });
-  };
-  window.addEventListener('scroll', updateActiveNav, { passive: true });
 
-  // ========== COUNTER ANIMATION ==========
-  const animateCounter = (el, target, duration = 2000) => {
-    const start = 0;
-    const startTime = performance.now();
-    const isLarge = target > 1000;
+function updateTelemetry() {
 
-    const step = (now) => {
-      const progress = Math.min((now - startTime) / duration, 1);
-      const eased = 1 - Math.pow(1 - progress, 3);
-      const current = Math.floor(start + (target - start) * eased);
-      el.textContent = isLarge ? current.toLocaleString('en-IN') : current;
-      if (progress < 1) requestAnimationFrame(step);
-      else el.textContent = isLarge ? target.toLocaleString('en-IN') : target;
-    };
-    requestAnimationFrame(step);
-  };
+  const neural = randomNumber(65, 96);
+  const process = randomNumber(82, 99);
+  const mem = randomNumber(48, 82);
 
-  // ========== COUNTDOWN TIMERS ==========
-  const initCountdowns = () => {
-    document.querySelectorAll('.countdown').forEach(el => {
-      let remaining = parseInt(el.dataset.time, 10) || 3600;
+  neuralLoad.textContent = neural + "%";
+  processing.textContent = process + "%";
+  memory.textContent = mem + "%";
 
-      const update = () => {
-        if (remaining <= 0) {
-          el.querySelectorAll('.time-val').forEach(v => (v.textContent = '00'));
-          return;
-        }
-        const h = Math.floor(remaining / 3600);
-        const m = Math.floor((remaining % 3600) / 60);
-        const s = remaining % 60;
-        el.querySelector('[data-unit="h"]').textContent = String(h).padStart(2, '0');
-        el.querySelector('[data-unit="m"]').textContent = String(m).padStart(2, '0');
-        el.querySelector('[data-unit="s"]').textContent = String(s).padStart(2, '0');
-        remaining--;
-      };
-      update();
-      setInterval(update, 1000);
-    });
-  };
+  neuralMeter.style.width = neural + "%";
+  processingMeter.style.width = process + "%";
+  memoryMeter.style.width = mem + "%";
 
-  // ========== SCROLL REVEAL ==========
-  const revealObserver = new IntersectionObserver(
-    (entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-        }
-      });
-    },
-    { threshold: 0.12, rootMargin: '0px 0px -40px 0px' }
+  networkValue.textContent =
+    (99 + Math.random()).toFixed(1) + "%";
+}
+
+setInterval(updateTelemetry, 1800);
+updateTelemetry();
+
+
+/* ================= LIVE DATA ================= */
+
+const dataMessages = [
+  "NEURAL PATHWAY SYNCHRONIZED",
+  "QUANTUM NODE ACTIVE",
+  "PATTERN RECOGNITION RUNNING",
+  "ENVIRONMENTAL SCAN UPDATED",
+  "PREDICTION MATRIX RECALCULATED",
+  "SECURITY LAYER VERIFIED",
+  "COGNITIVE NETWORK OPTIMIZED",
+  "DATA STREAM ENCRYPTED",
+  "AI DECISION TREE UPDATED",
+  "VOICE INTERFACE STANDBY",
+  "MEMORY SYNAPSES SYNCHRONIZED",
+  "SPATIAL MODEL UPDATED",
+  "THREAT ANALYSIS COMPLETE",
+  "CORE ENERGY STABLE"
+];
+
+
+function addDataMessage() {
+
+  const message =
+    dataMessages[
+      Math.floor(Math.random() * dataMessages.length)
+    ];
+
+  const line = document.createElement("div");
+
+  const time = new Date().toLocaleTimeString(
+    "en-IN",
+    { hour12: false }
   );
 
-  document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+  line.textContent =
+    "> [" + time + "] " + message;
 
-  // Stats counter
-  const statsEl = document.querySelector('.hero-stats');
-  if (statsEl) {
-    const statsObserver = new IntersectionObserver(
-      (entries) => {
-        if (entries[0].isIntersecting) {
-          statsEl.querySelectorAll('.stat-value').forEach(el => {
-            if (!el.dataset.counted) {
-              el.dataset.counted = '1';
-              animateCounter(el, parseInt(el.dataset.target, 10));
-            }
-          });
-          statsObserver.disconnect();
-        }
-      },
-      { threshold: 0.3 }
+  dataStream.appendChild(line);
+
+  while (dataStream.children.length > 8) {
+    dataStream.removeChild(
+      dataStream.firstElementChild
     );
-    statsObserver.observe(statsEl);
   }
 
-  // ========== CARD TILT ==========
-  document.querySelectorAll('[data-tilt]').forEach(card => {
-    card.addEventListener('mousemove', (e) => {
-      const rect = card.getBoundingClientRect();
-      const x = e.clientX - rect.left;
-      const y = e.clientY - rect.top;
-      const midX = rect.width / 2;
-      const midY = rect.height / 2;
-      const rotX = ((y - midY) / midY) * -6;
-      const rotY = ((x - midX) / midX) * 6;
+  dataStream.scrollTop = dataStream.scrollHeight;
+}
 
-      if (card.classList.contains('game-card')) {
-        const inner = card.querySelector('.game-card-inner');
-        if (inner) {
-          inner.style.transform = `perspective(1000px) rotateX(\( {rotX}deg) rotateY( \){rotY}deg) scale3d(1.02,1.02,1.02)`;
-        }
-      } else {
-        card.style.transform = `perspective(1000px) rotateX(\( {rotX}deg) rotateY( \){rotY}deg) scale3d(1.02,1.02,1.02)`;
-      }
-    });
+setInterval(addDataMessage, 1100);
 
-    card.addEventListener('mouseleave', () => {
-      if (card.classList.contains('game-card')) {
-        const inner = card.querySelector('.game-card-inner');
-        if (inner) inner.style.transform = '';
-      } else {
-        card.style.transform = '';
-      }
-    });
-  });
 
-  // ========== RIPPLE BUTTONS ==========
-  document.querySelectorAll('.ripple').forEach(btn => {
-    btn.addEventListener('click', function (e) {
-      const rect = this.getBoundingClientRect();
-      const size = Math.max(rect.width, rect.height);
-      const x = e.clientX - rect.left - size / 2;
-      const y = e.clientY - rect.top - size / 2;
-      const ripple = document.createElement('span');
-      ripple.className = 'ripple-effect';
-      ripple.style.width = ripple.style.height = `${size}px`;
-      ripple.style.left = `${x}px`;
-      ripple.style.top = `${y}px`;
-      this.appendChild(ripple);
-      setTimeout(() => ripple.remove(), 600);
-    });
-  });
+/* ================= RESPONSE ================= */
 
-  // ========== LEADERBOARD DATA ==========
-  const players = [
-    { rank: 1, name: 'ShadowStrike', wins: 248, earnings: '₹1,85,400', seed: 'shadow' },
-    { rank: 2, name: 'NeonViper', wins: 231, earnings: '₹1,62,200', seed: 'neon' },
-    { rank: 3, name: 'PhantomAce', wins: 219, earnings: '₹1,48,900', seed: 'phantom' },
-    { rank: 4, name: 'BlazeHunter', wins: 197, earnings: '₹1,21,500', seed: 'blaze' },
-    { rank: 5, name: 'CyberWolf', wins: 184, earnings: '₹98,700', seed: 'cyber' },
-  ];
+function showResponse(text) {
 
-  const lbBody = document.getElementById('leaderboardBody');
-  if (lbBody) {
-    lbBody.innerHTML = players.map(p => `
-      <div class="lb-row">
-        <span class="lb-rank rank-\( {p.rank}"># \){p.rank}</span>
-        <div class="lb-player">
-          <img class="lb-avatar" src="https://api.dicebear.com/7.x/avataaars/svg?seed=\( {p.seed}" alt=" \){p.name}" width="36" height="36" loading="lazy">
-          <span class="lb-name">${p.name}</span>
-        </div>
-        <span class="lb-wins">${p.wins}</span>
-        <span class="lb-earnings">${p.earnings}</span>
-      </div>
-    `).join('');
+  responseContent.textContent = text;
+
+  responsePanel.classList.add("show");
+
+  voiceState.textContent = "JARVIS RESPONDING";
+
+  setTimeout(() => {
+    voiceState.textContent = "JARVIS READY";
+  }, 2500);
+}
+
+
+function closeResponsePanel() {
+  responsePanel.classList.remove("show");
+}
+
+closeResponse.addEventListener(
+  "click",
+  closeResponsePanel
+);
+
+
+/* ================= JARVIS BRAIN ================= */
+
+function processCommand(command) {
+
+  const text = command
+    .toLowerCase()
+    .trim();
+
+  if (!text) return;
+
+
+  /* Greeting */
+
+  if (
+    text.includes("hello") ||
+    text.includes("hi") ||
+    text.includes("hey") ||
+    text.includes("jarvis")
+  ) {
+
+    showResponse(
+      "Good to see you. All JARVIS 2050 systems are operational. Neural core, security layer and cognitive engine are online."
+    );
+
+    return;
   }
 
-  // ========== AUTH TOGGLE (DEMO) ==========
-  const loginBtn = document.getElementById('loginBtn');
-  const registerBtn = document.getElementById('registerBtn');
-  const authButtons = document.getElementById('authButtons');
-  const userMenu = document.getElementById('userMenu');
 
-  const simulateLogin = () => {
-    authButtons?.classList.add('hidden');
-    userMenu?.classList.remove('hidden');
+  /* Status */
+
+  if (
+    text.includes("status") ||
+    text.includes("system")
+  ) {
+
+    showResponse(
+      "SYSTEM STATUS: ONLINE\n\n" +
+      "Neural Network: ACTIVE\n" +
+      "Quantum Core: ONLINE\n" +
+      "Security: PROTECTED\n" +
+      "Prediction Engine: ACTIVE\n" +
+      "Environment Scanner: RUNNING"
+    );
+
+    return;
+  }
+
+
+  /* Time */
+
+  if (text.includes("time")) {
+
+    const now = new Date();
+
+    showResponse(
+      "Current system time is " +
+      now.toLocaleTimeString("en-IN")
+    );
+
+    return;
+  }
+
+
+  /* Date */
+
+  if (
+    text.includes("date") ||
+    text.includes("today")
+  ) {
+
+    const now = new Date();
+
+    showResponse(
+      "Today's date is " +
+      now.toLocaleDateString("en-IN", {
+        weekday: "long",
+        day: "numeric",
+        month: "long",
+        year: "numeric"
+      })
+    );
+
+    return;
+  }
+
+
+  /* Clear */
+
+  if (
+    text === "clear" ||
+    text.includes("clear screen")
+  ) {
+
+    dataStream.innerHTML = "";
+
+    showResponse(
+      "Visual data stream cleared. JARVIS interface remains operational."
+    );
+
+    return;
+  }
+
+
+  /* Help */
+
+  if (
+    text.includes("help") ||
+    text.includes("commands")
+  ) {
+
+    showResponse(
+      "AVAILABLE COMMANDS\n\n" +
+      "• status\n" +
+      "• system status\n" +
+      "• time\n" +
+      "• date\n" +
+      "• clear\n" +
+      "• hello jarvis\n\n" +
+      "Voice input is also available."
+    );
+
+    return;
+  }
+
+
+  /* Generic AI response */
+
+  showResponse(
+    "Command received: \"" +
+    command +
+    "\"\n\n" +
+    "JARVIS neural engine has analyzed the request. " +
+    "The frontend intelligence layer is operational."
+  );
+}
+
+
+/* ================= COMMAND FORM ================= */
+
+commandForm.addEventListener(
+  "submit",
+  function(event) {
+
+    event.preventDefault();
+
+    const command = commandInput.value.trim();
+
+    if (!command) return;
+
+    processCommand(command);
+
+    commandInput.value = "";
+  }
+);
+
+
+/* ================= CLEAR BUTTON ================= */
+
+clearButton.addEventListener(
+  "click",
+  function() {
+
+    commandInput.value = "";
+
+    dataStream.innerHTML =
+      "<div>> DATA STREAM CLEARED</div>" +
+      "<div>> JARVIS READY</div>";
+
+    closeResponsePanel();
+  }
+);
+
+
+/* ================= VOICE RECOGNITION ================= */
+
+let recognition = null;
+
+const SpeechRecognition =
+  window.SpeechRecognition ||
+  window.webkitSpeechRecognition;
+
+
+if (SpeechRecognition) {
+
+  recognition = new SpeechRecognition();
+
+  recognition.continuous = false;
+  recognition.interimResults = false;
+  recognition.lang = "en-IN";
+
+
+  recognition.onstart = function() {
+
+    voiceState.textContent =
+      "JARVIS LISTENING...";
+
+    voiceButton.classList.add("listening");
   };
 
-  loginBtn?.addEventListener('click', simulateLogin);
-  registerBtn?.addEventListener('click', simulateLogin);
 
-  // ========== INIT ==========
-  initCountdowns();
+  recognition.onresult = function(event) {
 
-  document.body.style.opacity = '0';
-  requestAnimationFrame(() => {
-    document.body.style.transition = 'opacity 0.5s ease';
-    document.body.style.opacity = '1';
-  });
-})();
-/* Temporary fix - force show content */
-.reveal {
-  opacity: 1 !important;
-  transform: none !important;
+    const transcript =
+      event.results[0][0].transcript;
+
+    commandInput.value = transcript;
+
+    processCommand(transcript);
+  };
+
+
+  recognition.onerror = function() {
+
+    voiceState.textContent =
+      "VOICE ERROR";
+
+    setTimeout(() => {
+      voiceState.textContent =
+        "JARVIS READY";
+    }, 1500);
+  };
+
+
+  recognition.onend = function() {
+
+    voiceButton.classList.remove(
+      "listening"
+    );
+
+    setTimeout(() => {
+      voiceState.textContent =
+        "JARVIS READY";
+    }, 500);
+  };
+
+
+  voiceButton.addEventListener(
+    "click",
+    function() {
+
+      try {
+        recognition.start();
+      } catch (error) {
+        console.log(error);
+      }
+
+    }
+  );
+
+} else {
+
+  voiceButton.addEventListener(
+    "click",
+    function() {
+
+      showResponse(
+        "Voice recognition is not supported by this browser. Please use a browser with Web Speech API support."
+      );
+
+    }
+  );
 }
+
+
+/* ================= KEYBOARD SHORTCUT ================= */
+
+document.addEventListener(
+  "keydown",
+  function(event) {
+
+    if (
+      event.key === "/" &&
+      document.activeElement !== commandInput
+    ) {
+
+      event.preventDefault();
+
+      commandInput.focus();
+    }
+
+    if (event.key === "Escape") {
+      closeResponsePanel();
+    }
+
+  }
+);
+
+
+/* ================= STARTUP SEQUENCE ================= */
+
+function startupSequence() {
+
+  const messages = [
+    "BOOTING JARVIS 2050...",
+    "LOADING NEURAL ARCHITECTURE...",
+    "INITIALIZING QUANTUM CORE...",
+    "ESTABLISHING SECURE LINK...",
+    "CALIBRATING SENSOR ARRAY...",
+    "ACTIVATING COGNITIVE ENGINE...",
+    "JARVIS SYSTEM ONLINE"
+  ];
+
+  let index = 0;
+
+  const startup = setInterval(() => {
+
+    if (index >= messages.length) {
+
+      clearInterval(startup);
+
+      voiceState.textContent =
+        "JARVIS READY";
+
+      return;
+    }
+
+    addStartupMessage(messages[index]);
+
+    index++;
+
+  }, 550);
+}
+
+
+function addStartupMessage(message) {
+
+  const line = document.createElement("div");
+
+  const time =
+    new Date().toLocaleTimeString(
+      "en-IN",
+      { hour12: false }
+    );
+
+  line.textContent =
+    "> [" + time + "] " + message;
+
+  dataStream.appendChild(line);
+
+  while (dataStream.children.length > 8) {
+    dataStream.removeChild(
+      dataStream.firstElementChild
+    );
+  }
+}
+
+
+/* ================= INITIALIZE ================= */
+
+window.addEventListener(
+  "load",
+  function() {
+
+    startupSequence();
+
+    setTimeout(() => {
+
+      showResponse(
+        "JARVIS 2050 initialized successfully. Neural core is online and awaiting your command."
+      );
+
+    }, 4500);
+
+  }
+);
